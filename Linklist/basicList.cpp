@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+// this is just basic understanding on how we create a node and connect them to create a list.
+
 // struct Node
 // {
 //     int data{};
@@ -36,29 +38,29 @@ using namespace std;
 //         currentNode = currentNode->next;
 //     }
 // }
-// struct Node
-// {
-//     string productID;
-//     Node *next;
-//     Node() : productID(""), next(nullptr) {}
-//     Node(const string &id) : productID(id), next(nullptr) {}
-// };
+struct Node
+{
+    string productID;
+    Node *next;
+    Node() : productID(""), next(nullptr) {}
+    Node(const string &id) : productID(id), next(nullptr) {}
+};
 
-// int main()
-// {
-//     Node *firstNode = new Node("O101");
-//     Node *secondNode = new Node("O102");
-//     Node *thirdNode = new Node("O103");
-//     firstNode->next = secondNode;
-//     secondNode->next = thirdNode;
+int main()
+{
+    Node *firstNode = new Node("O101");
+    Node *secondNode = new Node("O102");
+    Node *thirdNode = new Node("O103");
+    firstNode->next = secondNode;
+    secondNode->next = thirdNode;
 
-//     Node *head = firstNode;
-//     Node *currentNode = head;
-//     while (currentNode != nullptr)
-//     {
-//         cout << currentNode->productID << " ";
-//         currentNode = currentNode->next;
-//     }
+    Node *head = firstNode;
+    Node *currentNode = head;
+    while (currentNode != nullptr)
+    {
+        cout << currentNode->productID << " ";
+        currentNode = currentNode->next;
+    }
 
-//     return 0;
-// }
+    return 0;
+}
