@@ -29,6 +29,24 @@ public:
         if (tail == nullptr)
             tail = newNode;
     }
+    bool insertAfter(const string &targetID, const string &id)
+    {
+        Node *current = head;
+        while (current != nullptr && current->productID != targetID)
+            current = current->next;
+
+        if (current == nullptr)
+            return false;
+
+        Node *newNode = new Node(id);
+        newNode->next = current->next;
+        current->next = newNode;
+
+        if (tail == current)
+            tail = newNode;
+
+        return true;
+    }
 
     void insertAtEnd(const string &id)
     {
@@ -53,6 +71,7 @@ public:
             cout << currentNode->productID << " ";
             currentNode = currentNode->next;
         }
+        cout << endl;
     }
 
     ~LinkedList()
@@ -74,10 +93,9 @@ int main()
     list.insertAtEnd("O102");
     list.insertAtEnd("O103");
     list.traversal();
-    cout << endl;
     list.insertAtBeginning("O100");
-    list.insertAtEnd("O104");
-    list.insertAtEnd("O105");
-    list.insertAtEnd("O106");
+    list.insertAfter("O102", "O1025");
     list.traversal();
+
+    return 0;
 }
