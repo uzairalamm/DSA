@@ -20,6 +20,16 @@ class LinkedList
 public:
     LinkedList() : head(nullptr), tail(nullptr) {}
 
+    void insertAtBeginning(const string &id)
+    {
+        Node *newNode = new Node(id);
+        newNode->next = head;
+        head = newNode;
+
+        if (tail == nullptr)
+            tail = newNode;
+    }
+
     void insertAtEnd(const string &id)
     {
         Node *newNode = new Node(id);
@@ -63,6 +73,9 @@ int main()
     list.insertAtEnd("O101");
     list.insertAtEnd("O102");
     list.insertAtEnd("O103");
+    list.traversal();
+    cout << endl;
+    list.insertAtBeginning("O100");
     list.insertAtEnd("O104");
     list.insertAtEnd("O105");
     list.insertAtEnd("O106");

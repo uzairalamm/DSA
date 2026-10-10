@@ -103,6 +103,14 @@ class LinkedList
 
 public:
     LinkedList() : head(nullptr) {}
+
+    void insertAtBeginning(const string &id)
+    {
+        Node *newNode = new Node(id);
+        newNode->next = head;
+        head = newNode;
+    }
+
     void insertAtEnd(const string &id)
     {
         Node *newNode = new Node(id);
@@ -137,5 +145,8 @@ int main()
     list.insertAtEnd("O101");
     list.insertAtEnd("O102");
     list.insertAtEnd("O103");
+    list.traversal();
+    cout << endl;
+    list.insertAtBeginning("O100");
     list.traversal();
 }
