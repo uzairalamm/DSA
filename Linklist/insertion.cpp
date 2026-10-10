@@ -177,23 +177,48 @@ public:
         if (tail == nullptr) // if the list is empty, set tail to the new node as well
             tail = newNode;
     }
+    bool insertBefore(const string &targetID, const string &id)
+    {
+        Node *currentNode = head;
+        Node *previousNode = nullptr;
+        while (currentNode != nullptr && currentNode->productID != targetID)
+        {
+            previousNode = currentNode;
+            currentNode = currentNode->next;
+        }
+
+        if (currentNode == nullptr)
+            return false;
+
+        if (previousNode == nullptr)
+        {
+            insertAtBeginning(id);
+            return true;
+        }
+
+        Node *newNode = new Node(id);
+        newNode->next = previousNode->next;
+        previousNode->next = newNode;
+
+        return true;
+    }
 
     bool insertAfter(const string &targetID, const string &id)
     {
-        Node *current = head;
-        while (current != nullptr && current->productID != targetID)
+        Node *currentNode = head;
+        while (currentNode != nullptr && currentNode->productID != targetID)
         {
-            current = current->next;
+            currentNode = currentNode->next;
         }
 
-        if (current == nullptr)
+        if (currentNode == nullptr)
             return false;
 
         Node *newNode = new Node(id);
-        newNode->next = current->next;
-        current->next = newNode;
+        newNode->next = currentNode->next;
+        currentNode->next = newNode;
 
-        if (tail == current)
+        if (tail == currentNode)
             tail = newNode;
 
         return true;
@@ -232,6 +257,7 @@ int main()
     list.insertAtEnd("O102");
     list.traversal();
     list.insertAtBeginning("O100");
-    list.insertAfter("O101", "O1011");
+    list.insertBefore("O101", "O1010");
+    list.insertAfter("O101", "O1015");
     list.traversal();
 }
