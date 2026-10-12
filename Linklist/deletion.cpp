@@ -89,6 +89,71 @@ public:
         tail = newNode;
     }
 
+    void insertAtPosition(const string &id, int pos)
+    {
+        if (pos < 1)
+        {
+            cout << "Invalid Position!\n";
+            return;
+        }
+
+        if (head == nullptr || pos == 1)
+        {
+            insertAtBeginning(id);
+            return;
+        }
+
+        Node *newNode = new Node(id);
+        Node *current = head;
+
+        for (int i = 1; i < pos - 1; i++)
+        {
+            current = current->next;
+            if (current == nullptr)
+            {
+                cout << "Invalid Position!\n";
+                return;
+            }
+        }
+        newNode->next = current->next;
+        current->next = newNode;
+    }
+
+    // Deletion Methods
+    void deleteAtBeginning()
+    {
+        if (head == nullptr)
+        {
+            cout << "Linked list is already Empty!\n";
+            return;
+        }
+
+        Node *temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    void deleteAtEnd()
+    {
+        if (head == nullptr)
+        {
+            cout << "Linked list is already Empty!\n";
+            return;
+        }
+
+        Node *current = head;
+        Node *previous = nullptr;
+
+        while (current->next != nullptr)
+        {
+            previous = current;
+            current = current->next;
+        }
+
+        previous->next = nullptr;
+        delete current;
+    }
+
     void traversal() const
     {
         Node *currentNode = head;
@@ -115,14 +180,15 @@ public:
 int main()
 {
     LinkedList list;
+
     list.insertAtBeginning("O100");
     list.insertAtEnd("O101");
     list.insertAtEnd("O102");
     list.insertAtEnd("O103");
-    list.traversal();
-
     list.insertAfter("O102", "O1025");
     list.insertBefore("O100", "O1000");
+    list.insertAtPosition("106", 7);
+    list.deleteAtEnd();
     list.traversal();
 
     return 0;
