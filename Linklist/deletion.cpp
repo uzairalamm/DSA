@@ -93,30 +93,32 @@ public:
     {
         if (pos < 1)
         {
-            cout << "Invalid Position!\n";
+            cout << "Invalid Position\n";
             return;
         }
-
-        if (head == nullptr || pos == 1)
+        if (pos == 1)
         {
             insertAtBeginning(id);
             return;
         }
 
         Node *newNode = new Node(id);
-        Node *current = head;
+        Node *currentNode = head;
 
         for (int i = 1; i < pos - 1; i++)
         {
-            current = current->next;
-            if (current == nullptr)
+            currentNode = currentNode->next;
+            if (currentNode == nullptr)
             {
-                cout << "Invalid Position!\n";
+                cout << "Invalid Position\n";
                 return;
             }
         }
-        newNode->next = current->next;
-        current->next = newNode;
+        newNode->next = currentNode->next;
+        currentNode->next = newNode;
+
+        if (tail == currentNode)
+            tail = newNode;
     }
 
     // Deletion Methods
@@ -151,6 +153,44 @@ public:
         }
 
         previous->next = nullptr;
+        tail = previous;
+        delete current;
+    }
+
+    void deleteAtAnyPosition(int pos)
+    {
+        if (pos == 1)
+        {
+            deleteAtBeginning();
+            return;
+        }
+        if (pos < 1)
+        {
+            cout << "Invalid Position\n";
+            return;
+        }
+
+        Node *current = head;
+        Node *previous = nullptr;
+        for (int i = 1; i < pos; i++)
+        {
+            previous = current;
+            current = current->next;
+
+            if (current->next == nullptr)
+            {
+                previous->next = nullptr;
+                delete current;
+                return;
+            }
+            if (current == nullptr)
+            {
+                cout << "Invalid Position\n";
+                return;
+            }
+        }
+
+        previous->next = current->next;
         delete current;
     }
 
@@ -187,8 +227,8 @@ int main()
     list.insertAtEnd("O103");
     list.insertAfter("O102", "O1025");
     list.insertBefore("O100", "O1000");
-    list.insertAtPosition("106", 7);
-    list.deleteAtEnd();
+    list.insertAtPosition("106", 5);
+    list.deleteAtAnyPosition(3);
     list.traversal();
 
     return 0;
