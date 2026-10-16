@@ -230,10 +230,10 @@ int main()
     list.insertAtBeginning("O100");
     list.insertAtEnd("O101");
     list.insertAtEnd("O102");
-    // list.insertAtEnd("O103");
-    // list.insertAfter("O102", "O1025");
-    // list.insertBefore("O100", "O1000");
-    // list.insertAtPosition("106", 5);
+    list.insertAtEnd("O103");
+    list.insertAfter("O102", "O1025");
+    list.insertBefore("O100", "O1000");
+    list.insertAtPosition("106", 5);
     list.deleteAtAnyPosition(3);
     list.traversal();
 

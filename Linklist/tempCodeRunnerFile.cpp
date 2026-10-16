@@ -1,1 +1,2 @@
-    // list.deleteAtEnd();
+
+            previous = current;
