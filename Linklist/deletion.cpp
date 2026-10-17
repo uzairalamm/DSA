@@ -29,7 +29,7 @@ public:
         if (tail == nullptr)
             tail = newNode;
     }
-    bool insertBefore(const string &targetID, const string &id)
+    void insertBefore(const string &targetID, const string &id)
     {
         Node *currentNode = head;
         Node *previousNode = nullptr;
@@ -40,29 +40,30 @@ public:
         }
 
         if (currentNode == nullptr)
-            return false;
+            return;
 
         if (previousNode == nullptr)
         {
             insertAtBeginning(id);
-            return true;
+            return;
         }
 
         Node *newNode = new Node(id);
         newNode->next = previousNode->next;
         previousNode->next = newNode;
-
-        return true;
     }
 
-    bool insertAfter(const string &targetID, const string &id)
+    void insertAfter(const string &targetID, const string &id)
     {
         Node *currentNode = head;
         while (currentNode != nullptr && currentNode->productID != targetID)
             currentNode = currentNode->next;
 
         if (currentNode == nullptr)
-            return false;
+        {
+            cout << "Invalid Target!\n";
+            return;
+        }
 
         Node *newNode = new Node(id);
         newNode->next = currentNode->next;
@@ -70,8 +71,6 @@ public:
 
         if (tail == currentNode)
             tail = newNode;
-
-        return true;
     }
 
     void insertAtEnd(const string &id)
@@ -122,11 +121,24 @@ public:
     }
 
     // Deletion Methods
+
+    void utilityForDeletion()
+    {
+        delete head;
+        head = nullptr;
+        tail = nullptr;
+    }
     void deleteAtBeginning()
     {
         if (head == nullptr)
         {
             cout << "Linked list is already Empty!\n";
+            return;
+        }
+
+        if (head == tail) // this mean linked list only have one node.
+        {
+            utilityForDeletion();
             return;
         }
 
@@ -143,38 +155,39 @@ public:
             return;
         }
 
-        Node *current = head;
-        Node *previous = nullptr;
-
-        while (current->next != nullptr)
+        if (head == tail)
         {
-            previous = current;
-            current = current->next;
+            utilityForDeletion();
+            return;
         }
+        Node *current = head;
 
-        previous->next = nullptr;
-        tail = previous;
-        delete current;
+        while (current->next != tail)
+            current = current->next;
+
+        delete tail;
+        tail = current;
+        tail->next = nullptr;
     }
 
     void deleteAtAnyPosition(int pos)
     {
         if (head == nullptr)
         {
-            cout << "Linked List is Empty\n";
-        }
-
-        if (pos == 1)
-        {
-            deleteAtBeginning();
+            cout << "Linked list is already Empty!\n";
             return;
         }
+
         if (pos < 1)
         {
             cout << "Invalid Position\n";
             return;
         }
-
+        if (pos == 1)
+        {
+            deleteAtBeginning();
+            return;
+        }
         Node *current = head;
         Node *previous = nullptr;
         for (int i = 1; i < pos; i++)
@@ -234,7 +247,7 @@ int main()
     list.insertAfter("O102", "O1025");
     list.insertBefore("O100", "O1000");
     list.insertAtPosition("106", 5);
-    list.deleteAtAnyPosition(3);
+    list.deleteAtEnd();
     list.traversal();
 
     return 0;
