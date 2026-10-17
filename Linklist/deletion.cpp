@@ -201,13 +201,8 @@ public:
             }
         }
 
-        if (current->next == nullptr)
-        {
-            previous->next = nullptr;
+        if (current == tail)
             tail = previous;
-            delete current;
-            return;
-        }
 
         previous->next = current->next;
         delete current;
@@ -248,6 +243,7 @@ int main()
     list.insertBefore("O100", "O1000");
     list.insertAtPosition("106", 5);
     list.deleteAtEnd();
+    list.deleteAtAnyPosition(6);
     list.traversal();
 
     return 0;
