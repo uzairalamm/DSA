@@ -52,8 +52,18 @@ public:
         Node *current = head;
         while (current != nullptr)
         {
-            cout << current->id << " " << current->pre << "\n";
+            cout << current->id << " ";
             current = current->next;
+        }
+        cout << endl;
+    }
+    void traversalBackward() const
+    {
+        Node *current = tail;
+        while (current != nullptr)
+        {
+            cout << current->id << " ";
+            current = current->pre;
         }
         cout << endl;
     }
@@ -65,5 +75,7 @@ int main()
     list.insertAtBegin("102");
     list.insertAtBegin("101");
     list.insertionAtEnd("103");
+    list.insertionAtEnd("105");
     list.traversal();
+    list.traversalBackward();
 }
