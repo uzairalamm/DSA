@@ -168,16 +168,16 @@ class LinkedList
 
 public:
     LinkedList() : head(nullptr), tail(nullptr) {}
-
     void insertAtBeginning(const string &id)
     {
         Node *newNode = new Node(id);
-        newNode->next = head; // nullptr if the list is empty, otherwise points to the current head
+        newNode->next = head;
         head = newNode;
-        if (tail == nullptr) // if the list is empty, set tail to the new node as well
+
+        if (tail == nullptr)
             tail = newNode;
     }
-    bool insertBefore(const string &targetID, const string &id)
+    void insertBefore(const string &targetID, const string &id)
     {
         Node *currentNode = head;
         Node *previousNode = nullptr;
@@ -188,31 +188,30 @@ public:
         }
 
         if (currentNode == nullptr)
-            return false;
+            return;
 
         if (previousNode == nullptr)
         {
             insertAtBeginning(id);
-            return true;
+            return;
         }
 
         Node *newNode = new Node(id);
         newNode->next = previousNode->next;
         previousNode->next = newNode;
-
-        return true;
     }
 
-    bool insertAfter(const string &targetID, const string &id)
+    void insertAfter(const string &targetID, const string &id)
     {
         Node *currentNode = head;
         while (currentNode != nullptr && currentNode->productID != targetID)
-        {
             currentNode = currentNode->next;
-        }
 
         if (currentNode == nullptr)
-            return false;
+        {
+            cout << "Invalid Target!\n";
+            return;
+        }
 
         Node *newNode = new Node(id);
         newNode->next = currentNode->next;
@@ -220,13 +219,12 @@ public:
 
         if (tail == currentNode)
             tail = newNode;
-
-        return true;
     }
 
     void insertAtEnd(const string &id)
     {
         Node *newNode = new Node(id);
+
         if (head == nullptr)
         {
             head = newNode;
@@ -234,8 +232,40 @@ public:
             return;
         }
 
-        tail->next = newNode; // connect tail's next to the new node
-        tail = newNode;       // update tail to point to the new node
+        tail->next = newNode;
+        tail = newNode;
+    }
+
+    void insertAtPosition(const string &id, int pos)
+    {
+        if (pos < 1)
+        {
+            cout << "Invalid Position\n";
+            return;
+        }
+        if (pos == 1)
+        {
+            insertAtBeginning(id);
+            return;
+        }
+
+        Node *newNode = new Node(id);
+        Node *currentNode = head;
+
+        for (int i = 1; i < pos - 1; i++)
+        {
+            currentNode = currentNode->next;
+            if (currentNode == nullptr)
+            {
+                cout << "Invalid Position\n";
+                return;
+            }
+        }
+        newNode->next = currentNode->next;
+        currentNode->next = newNode;
+
+        if (tail == currentNode)
+            tail = newNode;
     }
 
     void traversal()
