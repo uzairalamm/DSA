@@ -32,21 +32,6 @@ public:
         head = newNode;
     }
 
-    void insertionAtEnd(const string &id)
-    {
-        Node *newNode = new Node(id);
-        if (head == nullptr)
-        {
-            head = newNode;
-            tail = newNode;
-            return;
-        }
-
-        tail->next = newNode;
-        newNode->pre = tail;
-        tail = newNode;
-    }
-
     void traversal() const
     {
         Node *current = head;
@@ -74,8 +59,6 @@ int main()
     doubleLinkList list;
     list.insertAtBegin("102");
     list.insertAtBegin("101");
-    list.insertionAtEnd("103");
-    list.insertionAtEnd("105");
     list.traversal();
     list.traversalBackward();
 }
