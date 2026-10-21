@@ -73,7 +73,7 @@ public:
         newNode->next = current->next;
         newNode->pre = current;
 
-        if (current->next != nullptr)
+        if (current != tail)
             current->next->pre = newNode;
         current->next = newNode;
 
