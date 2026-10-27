@@ -128,7 +128,7 @@ int main()
     list.insertAtBegin("102");
     list.insertAtBegin("101");
     list.deletionAtPosition(3);
-    cout << list.head << ' ' << list.tail << endl;
+    cout << list.head << ' ' << list.tail->next << endl;
     list.traversal();
     list.traversalBackward();
 }
