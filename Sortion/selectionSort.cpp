@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void bubbleSort(int arr[], int size, int choice = 1)
+void selectionSort(int arr[], int size, int choice = 1)
 {
     for (int i = 0; i < size - 1; i++)
     {
@@ -50,14 +50,14 @@ int main()
         {
         case 1:
             cout << "Sorted in Ascending Order\n";
-            bubbleSort(arr, SIZE, choice);
+            selectionSort(arr, SIZE, choice);
             printArr(arr, SIZE);
             line();
             break;
 
         case 2:
             cout << "Sorted in Descending Order\n";
-            bubbleSort(arr, SIZE, choice);
+            selectionSort(arr, SIZE, choice);
             printArr(arr, SIZE);
             line();
             break;
