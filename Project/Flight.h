@@ -21,12 +21,13 @@ public:
     Flight(int id, string from, string to, int time, int flightPrice, int seats) : flightId(id), fromCode(from), toCode(to), departureTime(time),
                                                                                    price(flightPrice), bookedSeats(0), totalSeats(seats) {};
 
-    string getfromCode() const { return fromCode; }
+    string getFromCode() const { return fromCode; }
     string getToCode() const { return toCode; }
 
-    int getDepartureTime() const { return departureTime; }
     int getFlightId() const { return flightId; }
+    int getDepartureTime() const { return departureTime; }
     int getPrice() const { return price; }
+    int getBookedSeats() { return bookedSeats; }
 
     void addBooking() { bookedSeats++; }
     void removeBooking() { bookedSeats--; }
