@@ -64,4 +64,36 @@ public:
             currentNode = currentNode->next;
         }
     }
+    ~Stack()
+    {
+        while (top != nullptr)
+        {
+            Node *temp = top;
+
+            top = top->next;
+
+            delete temp;
+        }
+    }
 };
+int main()
+{
+    Stack myStack;
+
+    myStack.push(10);
+    myStack.push(20);
+    myStack.push(30);
+    myStack.push(40);
+
+    myStack.display();
+
+    cout << "Top element: " << myStack.peek() << endl;
+
+    myStack.pop();
+
+    cout << "After pop:" << endl;
+
+    myStack.display();
+
+    return 0;
+}
